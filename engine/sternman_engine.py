@@ -1,15 +1,16 @@
 from abc import ABC
 
-from car import Car
+class Engine(ABC):
+    def __init__(self, last_service_date):
+        self.last_service_date = last_service_date
 
+    def engine_should_be_serviced(self):
+        raise NotImplementedError("Subclasses must implement engine_should_be_serviced method")
 
-class SternmanEngine(Car, ABC):
+class SternmanEngine(Engine):
     def __init__(self, last_service_date, warning_light_is_on):
         super().__init__(last_service_date)
         self.warning_light_is_on = warning_light_is_on
 
     def engine_should_be_serviced(self):
-        if self.warning_light_is_on:
-            return True
-        else:
-            return False
+        return self.warning_light_is_on
